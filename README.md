@@ -28,4 +28,4 @@ python main.py <playlist_id>
 
 ## Contact Me
 
-If you need more info or any support please feel free to contact [me](yogeshin247@gmail.com)
+If you need more info or any support please feel free to contact [me](mailto:yogeshin247@gmail.com)
