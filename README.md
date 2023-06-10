@@ -10,8 +10,7 @@ A simple python script to convert Spotify playlist into YouTube playlist
 2. Once your project is created, select it from the project dropdown menu in the top navigation bar.
 3. Go to the Credentials page in the API & Services section of the left sidebar.
 4. Click on the "Create Credentials" button and select "OAuth client ID".
-5. After creating select edit button in the OAuth 2.0 Client IDs, Under 'Authorized JavaScript origins' add this URI http://localhost and under "Authorized redirect URIs
-" add this URI http://localhost and then click save.
+5. After creating select edit button in the OAuth 2.0 Client IDs, Select application type as Desktop App and then click create. 
 6. Click the download button to download the credentials in your project directory. Rename the file to `client_secret.json`
 7. Go to the OAuth consent screen in the API & Services section of the left sidebar. Under test user add your Gmail id.
 8. Go to the Spotify Developer Dashboard and log in with your Spotify account.
