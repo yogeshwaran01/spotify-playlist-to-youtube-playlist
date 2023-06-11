@@ -1,4 +1,3 @@
-# import argparse
 import click
 import logging
 import time
@@ -6,19 +5,7 @@ import time
 from spotify_client import SpotifyClient
 from youtube_client import YouTubeClient
 
-# parser = argparse.ArgumentParser(
-#     prog="Tune2Tube",
-#     description="From Spotify's Groove to YouTube's Show: Seamless Conversion!",
-# )
-
 logging.basicConfig(level=logging.INFO)
-
-# parser.add_argument("playlist_id", type=str, help="Spotify playlist id", required=False)
-# parser.add_argument("--public", action="store_true", help="Create public playlist")
-
-# parser.add_argument("sync")
-
-# args = parser.parse_args()
 
 
 @click.group()

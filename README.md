@@ -37,11 +37,11 @@ A simple python script to convert and sync your Spotify playlist into YouTube pl
 8. Go to the Spotify Developer Dashboard and log in with your Spotify account.
 9. Click on the "Create an App" button and fill out the necessary information, such as the name and description of your application.
 10. Once you've created the app, you'll be taken to the app dashboard. Here, you'll find your client ID and client secret, which are used to authenticate your application with the Spotify API.
-11. Export `CLIENT_ID` and `CLIENT_SECRET` as environment variable
+11. Add you client id and secert in `.env` file
 
-```bash
-export CLIENT_ID="xxxxxxxxxxxxxxxxxx"
-export CLIENT_SECRET="xxxxxxxxxxxxxxxx"
+```env
+CLIENT_ID="xxxxxxxxxxxxxxxxxx"
+CLIENT_SECRET="xxxxxxxxxxxxxxxx"
 ```
 
 ### Requirements
