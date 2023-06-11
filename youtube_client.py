@@ -17,7 +17,7 @@ class YouTubeClient:
 
         self.youtube = build("youtube", "v3", credentials=creds)
 
-    def create_playlist(self, name: str, description: str):
+    def create_playlist(self, name: str, description: str, privacy_status: str = "private"):
         playlist = (
             self.youtube.playlists()
             .insert(
@@ -28,7 +28,7 @@ class YouTubeClient:
                         "description": description,
                         "defaultLanguage": "en",
                     },
-                    "status": {"privacyStatus": "public"},
+                    "status": {"privacyStatus": privacy_status},
                 },
             )
             .execute()
@@ -51,7 +51,34 @@ class YouTubeClient:
             )
         playlist_item = request.execute()
         return playlist_item
+    
+    def remove_song_playlist(self, playlist_id: str, video_id: str):
+        request = self.youtube.playlistItems().delete(id=video_id)
+        response = request.execute()
+        return response
 
     def search_video(self, query: str):
 
-        return Search(query).results[0].video_id
+        return Search(query).results[0]
+    
+    def get_playlist(self, playlist_id):
+        videos = []
+        next_page_token = None
+
+        while True:
+            request = self.youtube.playlistItems().list(
+                part="snippet",
+                playlistId=playlist_id,
+                maxResults=50,
+                pageToken=next_page_token
+            )
+
+            response = request.execute()
+
+            videos.extend(response["items"])
+            next_page_token = response.get("nextPageToken")
+
+            if not next_page_token:
+                break
+
+        return videos
