@@ -3,7 +3,9 @@ from dataclasses import dataclass
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+import dotenv
 
+dotenv.load_dotenv()
 
 @dataclass
 class Playlist:
