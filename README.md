@@ -80,9 +80,23 @@ Commands:
 python main.py create <spotify_playlist_id>
 ```
 
+```txt
+Usage: main.py create [OPTIONS] SPOTIFY_PLAYLIST_ID
+
+  Create a YouTube Playlist from Spotify Playlist
+
+Options:
+  --public                create a public playlist
+  -n, --name TEXT         Name of the YouTube playlist to be created
+  -d, --description TEXT  Description of the playlist
+  --help     
+```
+
 It will open the browser for authorization. Sign up with your google account to create playlist.
 
 use `--public` flag to create a public playlist
+use `--name` to name the playlist
+use `--description` to set the description of the playlist
 
 ```bash
 python main.py create <spotify_playlist_id> --public

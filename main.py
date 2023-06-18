@@ -1,6 +1,7 @@
 import click
 import logging
 import time
+import datetime
 
 from spotify_client import SpotifyClient
 from youtube_client import YouTubeClient
@@ -20,7 +21,9 @@ def cli():
 @click.command()
 @click.argument("spotify_playlist_id")
 @click.option("--public", is_flag=True, help="create a public playlist")
-def create(spotify_playlist_id: str, public: bool):
+@click.option("--name", "-n", help="Name of the YouTube playlist to be created")
+@click.option("--description", "-d", help="Description of the playlist")
+def create(spotify_playlist_id: str, public: bool, name: str, description: str):
     """Create a YouTube Playlist from Spotify Playlist"""
 
     spotify = SpotifyClient()
@@ -32,12 +35,31 @@ def create(spotify_playlist_id: str, public: bool):
         privacy_status = "public"
     else:
         privacy_status = "private"
-
-    youtube_playlist_id = youtube.create_playlist(
-        spotify_playlist.name,
-        spotify_playlist.description,
-        privacy_status=privacy_status,
-    )["id"]
+    
+    if name and description:
+        youtube_playlist_id = youtube.create_playlist(
+            name,
+            description,
+            privacy_status=privacy_status,
+        )["id"]
+    elif description:
+        youtube_playlist_id = youtube.create_playlist(
+            spotify_playlist.name,
+            description,
+            privacy_status=privacy_status,
+        )["id"]
+    elif name:
+        youtube_playlist_id = youtube.create_playlist(
+            name,
+            spotify_playlist.description,
+            privacy_status=privacy_status,
+        )["id"]
+    else:
+        youtube_playlist_id = youtube.create_playlist(
+            spotify_playlist.name,
+            spotify_playlist.description,
+            privacy_status=privacy_status,
+        )["id"]
 
     for track in spotify_playlist.tracks:
         logging.info(f"Searching for {track}")
@@ -101,7 +123,9 @@ def sync(spotify_playlist_id: str, youtube_playlist_id: str):
     for song in songs_to_be_removed:
         youtube.remove_song_playlist(youtube_playlist_id, song)
 
-    logging.info("Synced ..")
+    t = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    logging.info(f"Spotify playlist {spotify_playlist.name} Synced on {t}")
     logging.info(
         f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
     )
