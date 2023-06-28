@@ -1,12 +1,9 @@
 import click
-import logging
 import time
 import datetime
 
 from spotify_client import SpotifyClient
 from youtube_client import YouTubeClient
-
-logging.basicConfig(level=logging.INFO)
 
 
 @click.group()
@@ -20,10 +17,19 @@ def cli():
 
 @click.command()
 @click.argument("spotify_playlist_id")
-@click.option("--public", is_flag=True, help="create a public playlist")
+@click.option("--public", is_flag=True, help="Create a public playlist")
+@click.option("--private", is_flag=True, help="Create a public playlist")
 @click.option("--name", "-n", help="Name of the YouTube playlist to be created")
 @click.option("--description", "-d", help="Description of the playlist")
-def create(spotify_playlist_id: str, public: bool, name: str, description: str):
+@click.option("--only-link", "-l", default=False, help="just only link of playlist, logs not appear", is_flag=True)
+def create(
+    spotify_playlist_id: str,
+    public: bool,
+    private: bool,
+    name: str,
+    description: str,
+    only_link: bool,
+):
     """Create a YouTube Playlist from Spotify Playlist"""
 
     spotify = SpotifyClient()
@@ -33,9 +39,11 @@ def create(spotify_playlist_id: str, public: bool, name: str, description: str):
 
     if public:
         privacy_status = "public"
+    elif private:
+        privacy_status = "private"
     else:
         privacy_status = "private"
-    
+
     if name and description:
         youtube_playlist_id = youtube.create_playlist(
             name,
@@ -62,29 +70,41 @@ def create(spotify_playlist_id: str, public: bool, name: str, description: str):
         )["id"]
 
     for track in spotify_playlist.tracks:
-        logging.info(f"Searching for {track}")
+        if not only_link:
+            click.echo(f"Searching for {track}")
         video = youtube.search_video(track)
-        logging.info(f"Song found: {video.title}")
+        if not only_link:
+            click.echo(f"Song found: {video.title}")
         youtube.add_song_playlist(youtube_playlist_id, video.video_id)
-        logging.info("Song added")
+        if not only_link:
+            click.echo("Song added")
         time.sleep(1)
 
-    logging.info(f"Playlit {privacy_status} playlist created")
-    logging.info(
-        f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
-    )
-    logging.info(f"Playlist ID: {youtube_playlist_id}")
+    if not only_link:
+        click.echo(f"Playlit {privacy_status} playlist created")
+        click.echo(
+            f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
+        )
+        click.echo(f"Playlist ID: {youtube_playlist_id}")
+    else:
+        click.echo(f"https://www.youtube.com/playlist?list={youtube_playlist_id}")
 
 
 @click.command()
 @click.argument("spotify_playlist_id")
 @click.argument("youtube_playlist_id")
-def sync(spotify_playlist_id: str, youtube_playlist_id: str):
+@click.option("--only-link", "-l", default=False, help="just only link of playlist, logs not appear", is_flag=True)
+def sync(
+    spotify_playlist_id: str,
+    youtube_playlist_id: str,
+    only_link: bool,
+):
     """Sync your YouTube playlist with Spotify Playlist"""
     spotify = SpotifyClient()
     youtube = YouTubeClient()
 
-    logging.info("Syncing ...")
+    if not only_link:
+        click.echo("Syncing ...")
 
     spotify_playlist = spotify.get_playlist(spotify_playlist_id)
     youtube_playlist = youtube.get_playlist(youtube_playlist_id)
@@ -97,14 +117,11 @@ def sync(spotify_playlist_id: str, youtube_playlist_id: str):
     yt_p_ids = list(
         map(lambda x: x["snippet"]["resourceId"]["videoId"], youtube_playlist)
     )
-    # print(youtube_playlist_ids)
 
     searched_playlist = []
     for track in spotify_playlist.tracks:
         video = youtube.search_video(track)
         searched_playlist.append(video.video_id)
-
-    # print(searched_playlist)
 
     songs_to_be_added = []
     songs_to_be_removed = []
@@ -117,18 +134,25 @@ def sync(spotify_playlist_id: str, youtube_playlist_id: str):
         if song not in yt_p_ids:
             songs_to_be_added.append(song)
 
+    if not only_link:
+        click.echo("Adding songs ...")
     for song in songs_to_be_added:
         youtube.add_song_playlist(youtube_playlist_id, song)
 
+    if not only_link:
+        click.echo("Removing songs ...")
     for song in songs_to_be_removed:
         youtube.remove_song_playlist(youtube_playlist_id, song)
 
     t = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    logging.info(f"Spotify playlist {spotify_playlist.name} Synced on {t}")
-    logging.info(
-        f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
-    )
+    if not only_link:
+        click.echo(f"Spotify playlist {spotify_playlist.name} Synced on {t}")
+        click.echo(
+            f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
+        )
+    else:
+        click.echo(f"https://www.youtube.com/playlist?list={youtube_playlist_id}")
 
 
 cli.add_command(create)
