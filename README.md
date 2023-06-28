@@ -18,14 +18,17 @@
 
 <p align="center">From Spotify's Groove to YouTube's Show: Seamless Conversion! </p>
 
-
 ## What is this ?
 
-A simple python script to convert and sync your Spotify playlist into YouTube playlist.
+A simple python script to convert your Spotify playlist into YouTube playlist.
 
-## Usage
+## Features
 
-### Setup Spotify and YouTube
+- Create a YouTube Playlist from Spotify playlist
+- Sync a YouTube Playliset with Spotify playlist
+- Sync multiple Playlists
+
+## Setup Spotify and YouTube
 
 1. Go to the Google Cloud Console, sign in with your Google account, and create a new project.
 2. Once your project is created, select it from the project dropdown menu in the top navigation bar.
@@ -44,7 +47,7 @@ CLIENT_ID="xxxxxxxxxxxxxxxxxx"
 CLIENT_SECRET="xxxxxxxxxxxxxxxx"
 ```
 
-### Requirements
+## Requirements
 
 1. Python
 
@@ -54,30 +57,16 @@ CLIENT_SECRET="xxxxxxxxxxxxxxxx"
 pip install -r requirements.txt
 ```
 
-### Running the script
+### Usage
 
-```txt
-Usage: main.py [OPTIONS] COMMAND [ARGS]...
-
-  Tune2Tube
-
-  From Spotify's Groove to YouTube's Show: Seamless Conversion!
-
-  GitHub: https://github.com/yogeshwaran01/spotify-playlist-to-youtube-
-  playlist
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  create  Create a YouTube Playlist from Spotify Playlist
-  sync    Sync your YouTube playlist with Spotify Playlist
-```
+- [Create a new YouTube playlist from Spotify playlist](#create-a-youtube-playlist-from-spotify-playlist)
+- [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
+- [Sync multiple playlists](#sync-multiple-playlist)
 
 #### Create a YouTube Playlist from Spotify Playlist
 
 ```bash
-python main.py create <spotify_playlist_id>
+python main.py create SPOTIFY_PLAYLIST_ID
 ```
 
 ```txt
@@ -86,34 +75,106 @@ Usage: main.py create [OPTIONS] SPOTIFY_PLAYLIST_ID
   Create a YouTube Playlist from Spotify Playlist
 
 Options:
-  --public                create a public playlist
+  --public                Create a public playlist
+  --private               Create a public playlist
   -n, --name TEXT         Name of the YouTube playlist to be created
   -d, --description TEXT  Description of the playlist
-  --help     
+  -l, --only-link         just only link of playlist, logs not appear
+  -s, --save-to-sync      Save to list of playlist to sync
+  --help                  Show this message and exit.  
 ```
 
 It will open the browser for authorization. Sign up with your google account to create playlist.
 
-use `--public` flag to create a public playlist
-use `--name` to name the playlist
-use `--description` to set the description of the playlist
+Choose the desired options and provide the necessary details:
+
+- Use the `--public` flag to create a public YouTube playlist.
+- Use the `--private` flag to create a private YouTube playlist.
+- Use the `-n` or `--name` option to specify the name of the YouTube playlist.
+- Use the `-d` or `--description` option to provide a description for the YouTube playlist.
+- Use the `-l` or `--only-link` flag to retrieve only the link of the YouTube playlist without displaying logs.
+- Use the `-s` or `--save-to-sync` flag to save the created playlist to the list of playlists to sync. Refer [this](#sync-multiple-playlist)
+
+##### Examples
+
+- Create a public YouTube playlist with a custom name and description:
 
 ```bash
-python main.py create <spotify_playlist_id> --public
+python main.py create --public -n "My Playlist" -d "A collection of my favorite songs" SPOTIFY_PLAYLIST_ID
+```
+
+- Create a private YouTube playlist and save it to the list of playlists to sync:
+
+```bash
+python main.py create --private -s SPOTIFY_PLAYLIST_ID
+```
+
+- Get only the link of the YouTube playlist without displaying logs:
+
+```bash
+python main.py create -l SPOTIFY_PLAYLIST_ID
 ```
 
 #### Sync your YouTube Playlist with your Spotify playlist
 
-```bash
-python main.py sync <spotify_playlist_id> <youtube_playlist_id>
+```txt
+Usage: main.py sync [OPTIONS]
+
+  Sync your YouTube playlist with Spotify Playlist
+
+Options:
+  -s, --spotify_playlist_id TEXT  Spotify playlist ID
+  -y, --youtube_playlist_id TEXT  YouTube playlist ID
+  -l, --only-link                 just only link of playlist, logs not appear
+  --help                          Show this message and exit.
 ```
 
+```bash
+python main.py sync -s <spotify_playlist_id> -y <youtube_playlist_id>
+```
+
+- `-s`, `--spotify_playlist_id`: Specifies the Spotify playlist ID to sync.
+- `-y`, `--youtube_playlist_id`: Specifies the YouTube playlist ID to sync.
+- `-l`, `--only-link`: Retrieves only the link of the playlist without displaying logs.
+
 It alson open the browser for authorization. Sign up with your google account to sync playlist.
+
+Sync a Spotify playlist with a YouTube playlist and retrieve only the link:
+
+```bash
+python main.py sync -s SPOTIFY_PLAYLIST_ID -y YOUTUBE_PLAYLIST_ID --only-link
+```
+
+#### Sync Multiple playlist
+
+When creating a playlist, just add `--save-to-sync` or `-s` flag to it. It save the Spotify and YouTube playlist id in [playlists.json](https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/blob/master/playlists.json) file.
+
+When you need to sync it, just run
+
+```bash
+python main.py sync
+```
+
+It will sync all the playlists in that file.
+
+To clear that file just run,
+
+```bash
+python main.py clear
+```
 
 ### How this works
 
 Refer [this](https://dev.to/yogeshwaran01/from-spotify-to-youtube-how-i-built-a-python-script-to-convert-playlists-2h89) blog post for more info
 
-## Contact Me
+### Contact Me
 
 If you need more info or any support please feel free to contact [me](mailto:yogeshin247@gmail.com)
+
+### Contributing
+
+Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/blob/master/LICENSE) file for details.
