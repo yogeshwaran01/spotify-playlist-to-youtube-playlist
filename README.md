@@ -18,9 +18,9 @@
 
 <p align="center">From Spotify's Groove to YouTube's Show: Seamless Conversion! </p>
 
-## What is this ?
+## About
 
-A simple python script to convert your Spotify playlist into YouTube playlist.
+Python script to convert Spotify playlist to YouTube playlist.
 
 ## Features
 
