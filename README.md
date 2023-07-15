@@ -54,21 +54,16 @@ CLIENT_SECRET="xxxxxxxxxxxxxxxx"
 
 ## Requirements
 
-1. Python
-
+1. Install Python (https://www.python.org/)
 2. Install all required package
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Usage
+## Usage
 
-- [Create a new YouTube playlist from Spotify playlist](#create-a-youtube-playlist-from-spotify-playlist)
-- [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
-- [Sync multiple playlists](#sync-multiple-playlist)
-
-##### Usage
+#### Usage
 
 ```txt
 python main.py create [OPTIONS] SPOTIFY_PLAYLIST_ID
@@ -88,21 +83,25 @@ Options:
   --help                  Show this message and exit. Refer sync-multiple-playlist ection in ReadMe
 ```
 
+- [Create a new YouTube playlist from Spotify playlist](#create-a-youtube-playlist-from-spotify-playlist)
+- [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
+- [Sync multiple playlists](#sync-multiple-playlist)
+
 ##### Examples
 
-Create a YouTube Playlist from Spotify Playlist
+Create YouTube Playlist from Spotify Playlist
 
 ```bash
 python main.py create SPOTIFY_PLAYLIST_ID
 ```
 
-- Create a public YouTube playlist with a custom name and description:
+- Create public YouTube playlist with custom Playlist Title and Description:
 
 ```bash
 python main.py create --public -n "My Playlist" -d "A collection of my favorite songs" SPOTIFY_PLAYLIST_ID
 ```
 
-- Create a private YouTube playlist and save it to the list of playlists to sync:
+- Create private YouTube playlist and save it to the list of playlists to sync:
 
 ```bash
 python main.py create --private -s SPOTIFY_PLAYLIST_ID
@@ -112,7 +111,7 @@ python main.py create --private -s SPOTIFY_PLAYLIST_ID
 
 ## Sync YouTube Playlist with Spotify playlist
 
-#### Usage
+### Usage
 
 ```txt
 main.py sync [OPTIONS]
@@ -142,19 +141,15 @@ Sync Spotify playlist with YouTube playlist and retrieve only the link:
 python main.py sync -s SPOTIFY_PLAYLIST_ID -y YOUTUBE_PLAYLIST_ID --only-link
 ```
 
-### Sync Multiple playlist
+## Sync Multiple playlist
 
 When creating a playlist, just add `--save-to-sync` or `-s` flag to it. It save the Spotify and YouTube playlist id in [playlists.json](https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/blob/master/playlists.json) file.
 
-To sync run
-
+Sync all the playlists in that file -
 ```bash
 python main.py sync
 ```
-
-It will sync all the playlists in that file.
-
-To clear that file just run,
+Clear file -
 
 ```bash
 python main.py clear
