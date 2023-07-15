@@ -4,6 +4,7 @@
 
 ![image](https://github.com/Rexadev/spotify-playlist-to-youtube-playlist/assets/62152714/79e02f56-9405-4b69-84e1-9b73b190f6cf)
 
+#note to yogesh update my icon please
 <p align="center">
   <img src="./Icon.png" alt="logo"  width="300" height="200">
 </p>
