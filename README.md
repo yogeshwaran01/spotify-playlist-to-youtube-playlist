@@ -9,7 +9,7 @@
   <img src="./Icon.png" alt="logo"  width="300" height="200">
 </p>
 
-<p align="center">
+<p align="left">
     <a href="https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/yogeshwaran01/spotify-playlist-to-youtube-playlist"></a>
     <a href="https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/network">
     <img alt="GitHub forks" src="https://img.shields.io/github/forks/yogeshwaran01/spotify-playlist-to-youtube-playlist"></a>
