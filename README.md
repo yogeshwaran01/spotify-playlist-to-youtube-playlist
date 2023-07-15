@@ -1,5 +1,7 @@
 <h1 align="center"> Spot2Tube </h1>
 
+<p align="center">Convert Spotify Playlist to YouTube Playlist</p>
+
 ![image](https://github.com/Rexadev/spotify-playlist-to-youtube-playlist/assets/62152714/79e02f56-9405-4b69-84e1-9b73b190f6cf)
 
 <p align="center">
@@ -18,8 +20,6 @@
     </a>
     <img alt="GitHub Repo size" src="https://img.shields.io/github/repo-size/yogeshwaran01/spotify-playlist-to-youtube-playlist"/>
 </p>
-
-<p align="center">From Spotify's Groove to YouTube's Show: Seamless Conversion! </p>
 
 ## About
 
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-#### Usage
+### Usage
 
 ```txt
 python main.py create [OPTIONS] SPOTIFY_PLAYLIST_ID
@@ -90,7 +90,7 @@ Options:
 - [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
 - [Sync multiple playlists](#sync-multiple-playlist)
 
-##### Examples
+#### Examples
 
 Create YouTube Playlist from Spotify Playlist
 
