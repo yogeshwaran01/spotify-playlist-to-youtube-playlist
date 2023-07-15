@@ -1,5 +1,7 @@
 <h1 align="center"> Tune2Tube </h1>
 
+![image](https://github.com/Rexadev/spotify-playlist-to-youtube-playlist/assets/62152714/79e02f56-9405-4b69-84e1-9b73b190f6cf)
+
 <p align="center">
   <img src="./tune2tube.png" alt="logo"  width="300" height="200">
 </p>
