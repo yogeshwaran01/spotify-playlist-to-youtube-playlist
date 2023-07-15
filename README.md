@@ -28,7 +28,9 @@ Python script to convert Spotify playlist to YouTube playlist.
 - Sync a YouTube Playliset with Spotify playlist
 - Sync multiple Playlists
 
-## Setup Spotify and YouTube
+## Setup 
+
+###YouTube
 
 1. Go to the Google Cloud Console, sign in with your Google account, and create a new project.
 2. Once your project is created, select it from the project dropdown menu in the top navigation bar.
@@ -37,10 +39,13 @@ Python script to convert Spotify playlist to YouTube playlist.
 5. After creating select edit button in the OAuth 2.0 Client IDs, Select application type as Desktop App and then click create.
 6. Click the download button to download the credentials in your project directory. Rename the file to `client_secret.json`
 7. Go to the OAuth consent screen in the API & Services section of the left sidebar. Under test user add your Gmail id.
-8. Go to the Spotify Developer Dashboard and log in with your Spotify account.
-9. Click on the "Create an App" button and fill out the necessary information, such as the name and description of your application.
-10. Once you've created the app, you'll be taken to the app dashboard. Here, you'll find your client ID and client secret, which are used to authenticate your application with the Spotify API.
-11. Add you client id and secert in `.env` file
+
+###Spotify
+   
+1. Go to the Spotify Developer Dashboard and log in with your Spotify account.
+2. Click on the "Create an App" button and fill out the necessary information, such as the name and description of your application.
+3. Once you've created the app, you'll be taken to the app dashboard. Here, you'll find your client ID and client secret, which are used to authenticate your application with the Spotify API.
+4. Add you client id and secert in `.env` file
 
 ```env
 CLIENT_ID="xxxxxxxxxxxxxxxxxx"
@@ -63,7 +68,9 @@ pip install -r requirements.txt
 - [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
 - [Sync multiple playlists](#sync-multiple-playlist)
 
-#### Create a YouTube Playlist from Spotify Playlist
+#### Example
+
+Create a YouTube Playlist from Spotify Playlist
 
 ```bash
 python main.py create SPOTIFY_PLAYLIST_ID
