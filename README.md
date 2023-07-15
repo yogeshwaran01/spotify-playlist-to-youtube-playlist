@@ -24,8 +24,8 @@ Python script to convert Spotify playlist to YouTube playlist.
 
 ## Features
 
-- Create a YouTube Playlist from Spotify playlist
-- Sync a YouTube Playliset with Spotify playlist
+- Convert Spotify playlist to YouTube Playlist
+- Sync YouTube Playliset with Spotify playlist
 - Sync multiple Playlists
 
 ## Setup 
