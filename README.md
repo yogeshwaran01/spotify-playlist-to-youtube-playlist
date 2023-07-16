@@ -37,7 +37,7 @@ Python script to convert Spotify playlist to YouTube playlist.
 ### Requirements
 
 1. Install Python (https://www.python.org/)
-2. Install all required package
+2. Install all required package (After cloning the repo, inside the folder)
 
 ```bash
 pip install -r requirements.txt
