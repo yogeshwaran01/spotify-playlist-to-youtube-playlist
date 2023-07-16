@@ -28,9 +28,9 @@ Python script to convert Spotify playlist to YouTube playlist.
 
 ## Features
 
-- Convert Spotify playlist to YouTube Playlist
-- Sync YouTube Playliset with Spotify playlist
-- Sync multiple Playlists
+1. Convert Spotify playlist to YouTube Playlist
+2. Sync YouTube Playliset with Spotify playlist
+    Sync Multiple Playlists
 
 ## Setup 
 
@@ -67,6 +67,12 @@ pip install -r requirements.txt
 
 ## Usage
 
+#### Quick Guide
+
+- [Create a new YouTube playlist from Spotify playlist](#create-a-youtube-playlist-from-spotify-playlist)
+- [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
+- [Sync multiple playlists](#sync-multiple-playlist)
+
 ### Format
 
 ```txt
@@ -86,10 +92,6 @@ Options:
   -s, --save-to-sync      Save to list of playlist to sync
   --help                  Show this message and exit. Refer sync-multiple-playlist ection in ReadMe
 ```
-
-- [Create a new YouTube playlist from Spotify playlist](#create-a-youtube-playlist-from-spotify-playlist)
-- [Sync YouTube playlist with spotify playlist](#sync-your-youtube-playlist-with-your-spotify-playlist)
-- [Sync multiple playlists](#sync-multiple-playlist)
 
 #### Examples
 
@@ -120,9 +122,10 @@ python main.py create --private -s SPOTIFY_PLAYLIST_ID
 ```txt
 main.py sync [OPTIONS]
 ```
-#### Options
 
 ```
+Options:
+
   -s, --spotify_playlist_id TEXT  Spotify playlist ID
   -y, --youtube_playlist_id TEXT  YouTube playlist ID
   -l, --only-link                 just only link of playlist, logs not appear
@@ -149,7 +152,8 @@ python main.py sync -s SPOTIFY_PLAYLIST_ID -y YOUTUBE_PLAYLIST_ID --only-link
 
 When creating a playlist, just add `--save-to-sync` or `-s` flag to it. It save the Spotify and YouTube playlist id in [playlists.json](https://github.com/yogeshwaran01/spotify-playlist-to-youtube-playlist/blob/master/playlists.json) file.
 
-Sync all the playlists in that file -
+Sync all playlists in that file -
+
 ```bash
 python main.py sync
 ```
