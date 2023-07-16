@@ -32,9 +32,18 @@ Python script to convert Spotify playlist to YouTube playlist.
 2. Sync YouTube Playliset with Spotify playlist
     Sync Multiple Playlists
 
-## Setup 
+## Setup
 
-###YouTube
+### Requirements
+
+1. Install Python (https://www.python.org/)
+2. Install all required package
+
+```bash
+pip install -r requirements.txt
+```
+
+### YouTube
 
 1. Go to the Google Cloud Console, sign in with your Google account, and create a new project.
 2. Once your project is created, select it from the project dropdown menu in the top navigation bar.
@@ -44,7 +53,7 @@ Python script to convert Spotify playlist to YouTube playlist.
 6. Click the download button to download the credentials in your project directory. Rename the file to `client_secret.json`
 7. Go to the OAuth consent screen in the API & Services section of the left sidebar. Under test user add your Gmail id.
 
-###Spotify
+### Spotify
    
 1. Go to the Spotify Developer Dashboard and log in with your Spotify account.
 2. Click on the "Create an App" button and fill out the necessary information, such as the name and description of your application.
@@ -55,16 +64,6 @@ Python script to convert Spotify playlist to YouTube playlist.
 CLIENT_ID="xxxxxxxxxxxxxxxxxx"
 CLIENT_SECRET="xxxxxxxxxxxxxxxx"
 ```
-
-## Requirements
-
-1. Install Python (https://www.python.org/)
-2. Install all required package
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Usage
 
 #### Quick Guide
