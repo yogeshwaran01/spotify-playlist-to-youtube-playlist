@@ -89,7 +89,7 @@ Options:
   -d, --description TEXT  Description of the playlist
   -l, --only-link         just only link of playlist, logs not appear
   -s, --save-to-sync      Save to list of playlist to sync
-  --help                  Show this message and exit. Refer sync-multiple-playlist ection in ReadMe
+  --help                  Show this message and exit. Refer sync-multiple-playlist section in ReadMe
 ```
 
 #### Examples
