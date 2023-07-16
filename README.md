@@ -67,7 +67,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Usage
+### Format
 
 ```txt
 python main.py create [OPTIONS] SPOTIFY_PLAYLIST_ID
