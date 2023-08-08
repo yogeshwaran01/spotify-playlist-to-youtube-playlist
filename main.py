@@ -50,6 +50,8 @@ def create(
     spotify = SpotifyClient()
     youtube = YouTubeClient()
 
+# Get Songlist from Spotify
+    
     spotify_playlist = spotify.get_playlist(spotify_playlist_id)
 
     if public:
@@ -59,6 +61,8 @@ def create(
     else:
         privacy_status = "private"
 
+# Generate YouTube Playlist
+    
     if name and description:
         youtube_playlist_id = youtube.create_playlist(
             name,
@@ -84,6 +88,8 @@ def create(
             privacy_status=privacy_status,
         )["id"]
 
+    # SearchSongonYouTUbe
+    
     for track in spotify_playlist.tracks:
         if not only_link:
             click.echo(f"Searching for {track}")
@@ -143,6 +149,8 @@ def sync(
     spotify = SpotifyClient()
     youtube = YouTubeClient()
 
+# Sync between Spotify to YouTUbe
+    
     for playlist in playlists_to_be_synced:
         if not only_link:
             click.echo(
@@ -201,6 +209,8 @@ def sync(
             click.echo(
                 f"https://www.youtube.com/playlist?list={playlist['youtube_playlist_id']}"
             )
+
+# Clear playlists
 
 @click.command()
 def clear():
