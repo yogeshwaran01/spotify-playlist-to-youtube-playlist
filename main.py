@@ -92,23 +92,23 @@ def create(
     
     for track in spotify_playlist.tracks:
         if not only_link:
-            click.echo(f"Searching for {track}")
+            click.secho(f"Searching for {track}", fg="blue")
         video = youtube.search_video(track)
         if not only_link:
-            click.echo(f"Song found: {video.title}")
+            click.secho(f"Song found: {video.title}", fg="green")
         youtube.add_song_playlist(youtube_playlist_id, video.video_id)
         if not only_link:
-            click.echo("Song added")
+            click.secho("Song added", fg="green")
         time.sleep(1)
 
     if not only_link:
-        click.echo(f"Playlit {privacy_status} playlist created")
-        click.echo(
-            f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}"
+        click.secho(f"Playlist {privacy_status} playlist created", fg="blue")
+        click.secho(
+            f"Playlist found at https://www.youtube.com/playlist?list={youtube_playlist_id}", fg="blue"
         )
-        click.echo(f"Playlist ID: {youtube_playlist_id}")
+        click.secho(f"Playlist ID: {youtube_playlist_id}", fg="blue")
     else:
-        click.echo(f"https://www.youtube.com/playlist?list={youtube_playlist_id}")
+        click.secho(f"https://www.youtube.com/playlist?list={youtube_playlist_id}", fg="blue")
 
     if save_to_sync:
         manager.add_playlist(spotify_playlist_id, youtube_playlist_id, spotify_playlist.name, name, f"https://open.spotify.com/playlist/{spotify_playlist_id}", f"https://www.youtube.com/playlist?list={youtube_playlist_id}")
@@ -135,7 +135,7 @@ def sync(
     playlists_to_be_synced = []
 
     if spotify_playlist_id is None and youtube_playlist_id is None:
-        click.echo("Syncing Playlists ..")
+        click.secho("Syncing Playlists ..", fg="blue")
         playlists_to_be_synced = manager.playlists_to_be_synced
 
     else:
@@ -153,8 +153,8 @@ def sync(
     
     for playlist in playlists_to_be_synced:
         if not only_link:
-            click.echo(
-                f"Syncing between Spotify: {playlist['spotify_playlist_id']} and YouTube: {playlist['youtube_playlist_id']}"
+            click.secho(
+                f"Syncing between Spotify: {playlist['spotify_playlist_id']} and YouTube: {playlist['youtube_playlist_id']}", fg="blue"
             )
 
         spotify_playlist = spotify.get_playlist(playlist["spotify_playlist_id"])
@@ -189,25 +189,27 @@ def sync(
                 songs_to_be_added.append(song)
 
         if not only_link:
-            click.echo("Adding songs ...")
-        for song in songs_to_be_added:
-            youtube.add_song_playlist(playlist["youtube_playlist_id"], song)
+            click.secho("Adding songs ...", fg="green")
+        with click.progressbar(songs_to_be_added) as bar:
+            for song in bar:
+                youtube.add_song_playlist(playlist["youtube_playlist_id"], song)
 
         if not only_link:
-            click.echo("Removing songs ...")
-        for song in songs_to_be_removed:
-            youtube.remove_song_playlist(playlist["youtube_playlist_id"], song)
+            click.secho("Removing songs ...", fg="green")
+        with click.progressbar(songs_to_be_removed) as bar:
+            for song in bar:
+                youtube.remove_song_playlist(playlist["youtube_playlist_id"], song)
 
         t = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         if not only_link:
-            click.echo(f"Spotify playlist {spotify_playlist.name} Synced on {t}")
-            click.echo(
-                f"Playlist found at https://www.youtube.com/playlist?list={playlist['youtube_playlist_id']}"
+            click.secho(f"Spotify playlist {spotify_playlist.name} Synced on {t}", fg="blue")
+            click.secho(
+                f"Playlist found at https://www.youtube.com/playlist?list={playlist['youtube_playlist_id']}", fg="blue"
             )
         else:
-            click.echo(
-                f"https://www.youtube.com/playlist?list={playlist['youtube_playlist_id']}"
+            click.secho(
+                f"https://www.youtube.com/playlist?list={playlist['youtube_playlist_id']}", fg="blue"
             )
 
 # Clear playlists
@@ -218,7 +220,7 @@ def clear():
     with open(manager.playlist_file, "w") as file:
         json.dump([], file)
 
-    click.echo("cleared")
+    click.secho("cleared", fg="blue")
 
 
 cli.add_command(create)
