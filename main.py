@@ -154,7 +154,7 @@ def sync(
     for playlist in playlists_to_be_synced:
         if not only_link:
             click.secho(
-                f"Syncing YouTube: {playlist['youtube_playlist_id']}" to Spotify: {playlist['spotify_playlist_id']}, fg="blue"
+                f"Syncing YouTube: {playlist['youtube_playlist_id']} to Spotify: {playlist['spotify_playlist_id']}", fg="blue"
             )
 
         spotify_playlist = spotify.get_playlist(playlist["spotify_playlist_id"])
