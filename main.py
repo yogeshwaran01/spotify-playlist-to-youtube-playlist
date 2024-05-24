@@ -46,6 +46,10 @@ def create(
     save_to_sync: bool,
 ):
     """Create a YouTube Playlist from Spotify Playlist"""
+    
+    not_allowed_symbols_for_title = [">","<"]
+    if any([symbol in name for symbol in not_allowed_symbols_for_title]):
+        return click.secho(f"Aborting : Your playlist name contains disallowed character.\nHere is list of disallowed character : {not_allowed_symbols_for_title}",fg="red")
 
     spotify = SpotifyClient()
     youtube = YouTubeClient()
@@ -154,7 +158,7 @@ def sync(
     for playlist in playlists_to_be_synced:
         if not only_link:
             click.secho(
-                f"Syncing YouTube: {playlist['youtube_playlist_id']} to Spotify: {playlist['spotify_playlist_id']}", fg="blue"
+                f"Syncing YouTube: {playlist['youtube_playlist_id']} with Spotify: {playlist['spotify_playlist_id']}", fg="blue"
             )
 
         spotify_playlist = spotify.get_playlist(playlist["spotify_playlist_id"])
