@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define a light theme
+$tune2tube-light-primary: mat.define-palette(mat.$indigo-palette);
+$tune2tube-light-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$tune2tube-light-theme: mat.define-light-theme((
+  color: (
+    primary: $tune2tube-light-primary,
+    accent: $tune2tube-light-accent,
+  ),
+  typography: mat.define-typography-config(),
+));
+
+// Define your dark theme
+$tune2tube-dark-primary: mat.define-palette(mat.$blue-grey-palette);
+$tune2tube-dark-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$tune2tube-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $tune2tube-dark-primary,
+    accent: $tune2tube-dark-accent,
+  )
+  // Optionally, define dark theme typography if different
+  // typography: mat.define-typography-config(...),
+));
+
+// Apply the light theme by default
+@include mat.all-component-themes($tune2tube-light-theme);
+
+// Apply the dark theme when .dark-theme class is present on a parent element (e.g. body)
+.dark-theme {
+  @include mat.all-component-colors($tune2tube-dark-theme);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,66 @@
+<div class="playlist-page-container">
+  <div *ngIf="isLoading" class="loading-spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="error" class="error-message-container">
+    <mat-card appearance="outlined" color="warn">
+      <mat-card-title>Error Loading Playlists</mat-card-title>
+      <mat-card-content>
+        <p>{{ error }}</p>
+        <!-- TODO: Add a button to retry or navigate to login -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="content-loaded">
+    <mat-card class="playlist-selection-card">
+      <mat-card-header>
+        <mat-card-title>Your Spotify Playlists</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list *ngIf="(playlists$ | async) as playlists">
+          <div *ngIf="playlists.length > 0; else noPlaylists">
+            <mat-list-item
+              *ngFor="let playlist of playlists"
+              (click)="onPlaylistSelect(playlist)"
+              [ngClass]="{'selected-playlist': playlist.id === selectedPlaylistId}"
+              class="playlist-list-item">
+              <mat-icon matListItemIcon>queue_music</mat-icon>
+              <div matListItemTitle>{{ playlist.name }}</div>
+              <div matListItemLine>Owner: {{ playlist.owner }} | Tracks: {{ playlist.tracks_total }}</div>
+            </mat-list-item>
+          </div>
+          <ng-template #noPlaylists>
+            <p class="empty-list-message">No playlists found. Ensure you are logged in with Spotify and have playlists.</p>
+          </ng-template>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Conversion Section -->
+    <mat-card *ngIf="selectedPlaylistId" class="conversion-card">
+      <mat-card-header>
+        <mat-card-title>Convert Playlist to YouTube</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="conversion-form-content">
+        <mat-form-field appearance="outline" class="full-width-field">
+          <mat-label>New YouTube Playlist Name</mat-label>
+          <input matInput [(ngModel)]="newYouTubePlaylistName" placeholder="Enter name for YouTube playlist">
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" (click)="startConversion()" [disabled]="isConverting || !newYouTubePlaylistName.trim()" class="full-width-button convert-button">
+          <span *ngIf="!isConverting">Convert to YouTube</span>
+          <span *ngIf="isConverting" class="converting-button-content">
+            Converting...
+            <mat-spinner diameter="20" class="button-spinner"></mat-spinner>
+          </span>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Display Conversion Result or Error -->
+  <app-conversion-status [result]="conversionResult" [error]="conversionError" class="conversion-status-display"></app-conversion-status>
+
+</div>

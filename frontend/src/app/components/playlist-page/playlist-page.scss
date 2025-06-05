@@ -1,0 +1,118 @@
+.playlist-page-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between cards/sections */
+}
+
+.loading-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-message-container {
+  text-align: center;
+  padding: 20px;
+  mat-card {
+    max-width: 600px;
+    margin: 0 auto; // Center the card
+  }
+  p {
+    color: inherit; // Inherit color from card (warn)
+  }
+}
+
+.content-loaded {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.playlist-selection-card,
+.conversion-card {
+  width: 100%;
+  max-width: 700px; /* Limit width of cards on larger screens */
+  margin: 0 auto;   /* Center cards */
+}
+
+.playlist-list-item {
+  cursor: pointer;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04); /* Subtle hover for light theme */
+  }
+}
+
+.dark-theme .playlist-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* Subtle hover for dark theme */
+}
+
+
+.selected-playlist {
+  background-color: rgba(63, 81, 181, 0.1); /* Light primary color tint */
+  border-left: 4px solid #3f51b5; /* Primary color accent */
+}
+
+.dark-theme .selected-playlist {
+    background-color: rgba(130, 177, 255, 0.1); /* Lighter blue-grey for dark theme selection */
+    border-left: 4px solid #82b1ff;
+}
+
+
+.empty-list-message {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+.conversion-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.full-width-field,
+.full-width-button {
+  width: 100%;
+}
+
+.converting-button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-spinner {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.conversion-status-display {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto; /* Center this component too */
+}
+
+/* Responsive adjustments for side-by-side layout on larger screens if desired */
+/* @media (min-width: 960px) {
+  .content-loaded {
+    flex-direction: row;
+    align-items: flex-start; // Align items to the top
+  }
+  .playlist-selection-card {
+    flex: 1 1 50%; // Take up half the space
+  }
+  .conversion-card {
+    flex: 1 1 45%; // Take up slightly less, or adjust as needed
+    position: sticky; // Make conversion card sticky if desired
+    top: 20px;      // Example sticky position (adjust based on toolbar height)
+  }
+  .conversion-status-display {
+      flex-basis: 100%; // If .content-loaded is row, status might go below both
+  }
+} */

@@ -1,0 +1,40 @@
+<div *ngIf="result || error" style="margin-top: 20px;">
+  <mat-card *ngIf="result" [ngClass]="{'conversion-success': result.status === 'success', 'conversion-partial-success': result.status === 'partial_success', 'conversion-error-result': result.status === 'error'}">
+    <mat-card-header>
+      <mat-card-title>
+        <ng-container [ngSwitch]="result.status">
+          <ng-container *ngSwitchCase="'success'">Conversion Successful!</ng-container>
+          <ng-container *ngSwitchCase="'partial_success'">Conversion Partially Successful</ng-container>
+          <ng-container *ngSwitchCase="'error'">Conversion Problem</ng-container>
+          <ng-container *ngSwitchDefault>Conversion Result</ng-container>
+        </ng-container>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ result.message }}</p>
+      <p *ngIf="result.youtube_playlist_id">
+        YouTube Playlist ID: {{ result.youtube_playlist_id }}
+        <!-- TODO: Make this a clickable link, e.g.,
+             <a href="https://www.youtube.com/playlist?list={{ result.youtube_playlist_id }}" target="_blank">View Playlist</a>
+        -->
+      </p>
+      <p *ngIf="result.tracks_added !== undefined">Tracks Added: {{ result.tracks_added }} / {{ result.total_spotify_tracks }}</p>
+
+      <div *ngIf="result.errors && result.errors.length > 0">
+        <h4>Issues Encountered:</h4>
+        <ul>
+          <li *ngFor="let err of result.errors">{{ err }}</li>
+        </ul>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="error && !result" class="conversion-error-direct">
+    <mat-card-header>
+      <mat-card-title>Conversion Failed</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ error }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

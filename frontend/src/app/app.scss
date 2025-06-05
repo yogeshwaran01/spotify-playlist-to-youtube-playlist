@@ -1,0 +1,21 @@
+/* AppComponent specific styles */
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-content {
+  padding: 16px;
+  // Add more global layout styles here if needed
+}
+
+/* Responsive adjustments for toolbar or content if necessary */
+/* Example:
+@media (max-width: 600px) {
+  .app-content {
+    padding: 8px;
+  }
+  .app-toolbar span:first-child { // App title
+    font-size: 1rem; // Smaller title on small screens
+  }
+}
+*/

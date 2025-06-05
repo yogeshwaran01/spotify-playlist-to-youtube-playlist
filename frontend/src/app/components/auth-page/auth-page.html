@@ -1,0 +1,26 @@
+<div class="auth-page-container">
+  <mat-card class="auth-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to Tune2Tube!</mat-card-title>
+      <mat-card-subtitle>Please log in to convert your playlists.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Tune2Tube allows you to seamlessly transfer your Spotify playlists to YouTube.
+        Log in with both services to get started.
+      </p>
+      <div class="auth-buttons-container">
+        <button mat-raised-button color="primary" class="auth-button" (click)="onSpotifyLogin()">
+          <mat-icon>music_note</mat-icon> Login with Spotify
+        </button>
+        <button mat-raised-button color="warn" class="auth-button" (click)="onYouTubeLogin()">
+          <mat-icon svgIcon="youtube_logo"></mat-icon> Login with YouTube
+        </button>
+      </div>
+    </mat-card-content>
+    <mat-card-footer *ngIf="false">
+      <!-- Placeholder for future messages or links -->
+      <small>By logging in, you agree to our terms.</small>
+    </mat-card-footer>
+  </mat-card>
+</div>

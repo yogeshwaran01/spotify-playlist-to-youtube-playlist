@@ -1,0 +1,61 @@
+.auth-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: calc(100vh - 64px - 32px); // Full height minus toolbar and padding
+}
+
+.auth-card {
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+mat-card-header {
+  display: flex; /* Or use CSS to center title/subtitle if not by default */
+  justify-content: center;
+  padding-bottom: 16px; /* Add some space below header */
+}
+
+mat-card-title {
+    font-size: 1.5em; /* Larger title */
+}
+
+mat-card-content p {
+  margin-bottom: 24px; /* Space out paragraph from buttons */
+  line-height: 1.6;
+}
+
+.auth-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between buttons */
+}
+
+.auth-button {
+  width: 100%; /* Make buttons take full width of their container */
+  padding: 10px 0; /* Increase button padding */
+  font-size: 1rem; /* Slightly larger font in buttons */
+}
+
+.auth-button mat-icon {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .auth-card {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .auth-page-container {
+    padding: 10px;
+    min-height: calc(100vh - 56px - 20px); // Adjust for smaller toolbar if applicable
+  }
+
+  mat-card-title {
+    font-size: 1.3em;
+  }
+}
