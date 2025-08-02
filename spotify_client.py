@@ -13,6 +13,7 @@ class Playlist:
     name: str
     description: str
     tracks: list[str]
+    thumbnail_url: str
 
 
 class SpotifyClient:
@@ -34,4 +35,9 @@ class SpotifyClient:
                 [artist["name"] for artist in track["track"]["artists"]]
             )
             queries.append(f"{track_name} by {artists}")
-        return Playlist(playlist["name"], playlist["description"], queries)
+
+        thumbnail_url = None
+        if playlist["images"]:
+            thumbnail_url = playlist["images"][0]["url"]
+
+        return Playlist(playlist["name"], playlist["description"], queries, thumbnail_url)

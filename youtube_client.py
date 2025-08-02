@@ -1,5 +1,7 @@
 import os
 import json
+import io
+import requests
 
 from pytube import Search
 from pytube.contrib.search import logger
@@ -7,6 +9,7 @@ from pytube.contrib.search import logger
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseUpload
 
 logger.disabled = True
 
@@ -102,3 +105,20 @@ class YouTubeClient:
                 break
 
         return videos
+
+    def set_playlist_thumbnail(self, playlist_id: str, image_url: str):
+        response = requests.get(image_url)
+        image_bytes = io.BytesIO(response.content)
+
+        media = MediaIoBaseUpload(
+            image_bytes, mimetype="image/jpeg", chunksize=1024 * 1024, resumable=True
+        )
+
+        request = self.youtube.playlistImages().insert(
+            part="snippet",
+            body={"snippet": {"playlistId": playlist_id}},
+            media_body=media,
+        )
+
+        response = request.execute()
+        return response

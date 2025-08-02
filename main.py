@@ -36,6 +36,9 @@ def cli():
 @click.option(
     "--save-to-sync", "-s", is_flag=True, help="Save to list of playlist to sync"
 )
+@click.option(
+    "--thumbnail", "-t", is_flag=True, help="Set playlist thumbnail"
+)
 def create(
     spotify_playlist_id: str,
     public: bool,
@@ -44,6 +47,7 @@ def create(
     description: str,
     only_link: bool,
     save_to_sync: bool,
+    thumbnail: bool,
 ):
     """Create a YouTube Playlist from Spotify Playlist"""
 
@@ -113,6 +117,15 @@ def create(
     if save_to_sync:
         manager.add_playlist(spotify_playlist_id, youtube_playlist_id, spotify_playlist.name, name, f"https://open.spotify.com/playlist/{spotify_playlist_id}", f"https://www.youtube.com/playlist?list={youtube_playlist_id}")
         manager.commit()
+
+    if thumbnail:
+        if spotify_playlist.thumbnail_url:
+            youtube.set_playlist_thumbnail(youtube_playlist_id, spotify_playlist.thumbnail_url)
+            if not only_link:
+                click.secho("Thumbnail set", fg="green")
+        else:
+            if not only_link:
+                click.secho("No thumbnail found on Spotify", fg="yellow")
 
 
 @click.command()
