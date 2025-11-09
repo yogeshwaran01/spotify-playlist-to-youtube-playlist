@@ -223,9 +223,16 @@ def clear():
     click.secho("cleared", fg="blue")
 
 
+@click.command()
+def ui():
+    """Launch the web interface"""
+    from server import run_server
+    run_server()
+
 cli.add_command(create)
 cli.add_command(sync)
 cli.add_command(clear)
+cli.add_command(ui)
 
 if __name__ == "__main__":
     cli()
