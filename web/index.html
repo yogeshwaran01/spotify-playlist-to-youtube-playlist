@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tune2Tube</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tune2Tube</h1>
+            <p>From Spotify's Groove to YouTube's Show: Seamless Conversion!</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Create YouTube Playlist</h2>
+                <div class="form-group">
+                    <label for="spotify-playlist-id-create">Spotify Playlist ID</label>
+                    <input type="text" id="spotify-playlist-id-create" placeholder="Enter Spotify Playlist ID">
+                </div>
+                <div class="form-group">
+                    <label for="youtube-playlist-name">YouTube Playlist Name (Optional)</label>
+                    <input type="text" id="youtube-playlist-name" placeholder="Enter YouTube Playlist Name">
+                </div>
+                <div class="form-group">
+                    <label for="youtube-playlist-description">YouTube Playlist Description (Optional)</label>
+                    <input type="text" id="youtube-playlist-description" placeholder="Enter YouTube Playlist Description">
+                </div>
+                <div class="form-group">
+                    <label>Privacy</label>
+                    <div class="radio-group">
+                        <input type="radio" id="private" name="privacy" value="private" checked>
+                        <label for="private">Private</label>
+                        <input type="radio" id="public" name="privacy" value="public">
+                        <label for="public">Public</label>
+                    </div>
+                </div>
+                <button id="create-btn">Create Playlist</button>
+            </div>
+
+            <div class="card">
+                <h2>Sync Playlists</h2>
+                <div class="form-group">
+                    <label for="spotify-playlist-id-sync">Spotify Playlist ID</label>
+                    <input type="text" id="spotify-playlist-id-sync" placeholder="Enter Spotify Playlist ID">
+                </div>
+                <div class="form-group">
+                    <label for="youtube-playlist-id-sync">YouTube Playlist ID</label>
+                    <input type="text" id="youtube-playlist-id-sync" placeholder="Enter YouTube Playlist ID">
+                </div>
+                <button id="sync-btn">Sync Playlist</button>
+            </div>
+
+            <div class="card">
+                <h2>Setup Credentials</h2>
+                <div class="instructions">
+                    <p>To use Tune2Tube, you need to set up credentials for both Spotify and Google (YouTube).</p>
+                    <h3>Spotify Credentials</h3>
+                    <ol>
+                        <li>Go to the <a href="https://developer.spotify.com/dashboard/" target="_blank">Spotify Developer Dashboard</a>.</li>
+                        <li>Create an app to get a Client ID and Client Secret.</li>
+                        <li>Create a `.env` file in the root of this project.</li>
+                        <li>Add the following lines to the `.env` file:</li>
+                    </ol>
+                    <pre><code>CLIENT_ID=your_spotify_client_id
+CLIENT_SECRET=your_spotify_client_secret</code></pre>
+                    <h3>Google Credentials</h3>
+                    <ol>
+                        <li>Go to the <a href="https://console.developers.google.com/" target="_blank">Google API Console</a>.</li>
+                        <li>Create a new project.</li>
+                        <li>Enable the YouTube Data API v3.</li>
+                        <li>Create credentials for a "Desktop app".</li>
+                        <li>Download the JSON file and rename it to `client_secret.json` in the root of this project.</li>
+                    </ol>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Made with ❤️ by <a href="https://github.com/yogeshwaran01" target="_blank">Yogeshwaran</a></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
