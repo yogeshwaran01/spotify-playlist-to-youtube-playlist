@@ -228,4 +228,11 @@ cli.add_command(sync)
 cli.add_command(clear)
 
 if __name__ == "__main__":
-    cli()
+    import sys
+
+    if "-ui" in sys.argv or "--ui" in sys.argv:
+        from server import run_server
+
+        run_server()
+    else:
+        cli()
